@@ -1,6 +1,6 @@
 # Snake (Lua)
 
-A terminal snake game written in [Lua] — auto-generated from [Temper](https://temperlang.dev) source code.
+A terminal snake game written in Lua — auto-generated from [Temper](https://temperlang.dev) source code.
 
 ## How to Play
 
@@ -14,9 +14,25 @@ lua snake-game/init.lua
 
 Use **w/a/s/d** keys to steer the snake. No Enter key needed — input is raw mode.
 
-## The Story
+## What Is This?
 
-This code was not written by a human in Lua. It was written once in [Temper](https://temperlang.dev) — a programming language that compiles to 6 other languages — and then automatically compiled and published here by CI.
+This code was not written by a human in Lua. It was written once in [Temper](https://temperlang.dev) — a programming language that compiles to JavaScript, Python, Lua, Rust, Java, and C# — and then automatically compiled to Lua and published here by CI.
+
+Temper had no way to pause execution or read input. The only I/O was `console.log()`. To play snake, we had to add `sleep(ms)` and `readLine()` to the language itself — modifying the Temper compiler across all six backends.
+
+## What Changed in the Temper Compiler for Lua
+
+Lua was the hardest backend. It has no Promises, no event loop, and no threads. The initial implementation compiled `async {}` to `temper.TODO()` — a stub that created a coroutine but never ran it.
+
+**Compiler changes:**
+- `LuaSupportNetwork.kt`: `BuiltinOperatorId.Async` mapped from `"TODO"` to `"async_launch"`
+- `LuaTranslator.kt`: emits `temper.run_scheduler()` after all top-level code to drive the cooperative loop
+
+**Runtime** (`temper-core/init.lua`): A full cooperative coroutine scheduler. Three promise types (`PROMISE_SLEEP`, `PROMISE_READLINE`, `PROMISE_RESOLVED`) where `:await()` calls `coroutine.yield(self)` to hand control back to the scheduler. `stdsleep(ms)` returns a deadline-based promise instead of blocking. `stdreadline()` returns a readline promise. `run_scheduler()` runs round-robin: checks sleep deadlines against wall-clock time, polls for non-blocking input via `stty min 0 time 0`, and resumes ready coroutines. When only readline tasks remain (game over), it exits. A 10ms sleep prevents busy-spinning.
+
+This is ~120 lines of Lua implementing what other languages get from their runtime for free.
+
+## All 6 Backends
 
 The same snake game exists in 6 languages, all generated from [one Temper source](https://github.com/notactuallytreyanastasio/temper_snake):
 
@@ -29,19 +45,11 @@ The same snake game exists in 6 languages, all generated from [one Temper source
 | C# | [snake-csharp](https://github.com/notactuallytreyanastasio/snake-csharp) |
 | Java | [snake-java](https://github.com/notactuallytreyanastasio/snake-java) |
 
-## How It Works
-
-1. The game logic lives in [`temper_snake`](https://github.com/notactuallytreyanastasio/temper_snake) as `.temper.md` files
-2. A custom Temper compiler (branch [`do-crimes-to-play-snake`](https://github.com/temperlang/temper/tree/do-crimes-to-play-snake)) adds `sleep()` and `readLine()` I/O primitives
-3. GitHub Actions builds the compiler, compiles the game for all 6 backends, runs tests
-4. If tests pass, the compiled output is automatically pushed to this repo
-
-Every push to the source repo triggers a fresh build. This code is always in sync.
-
 ## Source
 
-[notactuallytreyanastasio/temper_snake](https://github.com/notactuallytreyanastasio/temper_snake)
+- Game source: [notactuallytreyanastasio/temper_snake](https://github.com/notactuallytreyanastasio/temper_snake)
+- Compiler branch: [`do-crimes-to-play-snake`](https://github.com/temperlang/temper/tree/do-crimes-to-play-snake) ([PR #376](https://github.com/temperlang/temper/pull/376))
 
 ---
 
-*Auto-generated from commit [`d27a2fddc11e33daafd386ab9534e4084cb1d29b`](https://github.com/notactuallytreyanastasio/temper_snake/commit/d27a2fddc11e33daafd386ab9534e4084cb1d29b)*
+*Auto-generated from commit [`bc2e9fd57ff0765930c54c5a8c0b6c14ad2c46a1`](https://github.com/notactuallytreyanastasio/temper_snake/commit/bc2e9fd57ff0765930c54c5a8c0b6c14ad2c46a1)*
