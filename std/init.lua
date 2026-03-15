@@ -1,4 +1,5 @@
 require('std/io')
+require('std/ws')
 require('std/testing')
 require('std/json')
 require('std/net')
