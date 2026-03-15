@@ -476,6 +476,7 @@ render = function(game__147)
   temper.stringbuilder_append(sb__149, temper.concat('Score: ', temper.int32_tostring(game__147.score), '  ', statusText__155, '\n'));
   return temper.stringbuilder_tostring(sb__149);
 end;
+temper.run_scheduler();
 exports = {};
 exports.Direction = Direction;
 exports.Up = Up;

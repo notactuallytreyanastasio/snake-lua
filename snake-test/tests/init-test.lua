@@ -325,6 +325,7 @@ Test_.test_tickDoesNothingWhenGameIsOver__103 = function()
     return nil;
   end);
 end;
+temper.run_scheduler();
 exports = {};
 local_56.LuaUnit.run(local_55({'--pattern', '^Test_%.', local_55(arg)}));
 return exports;

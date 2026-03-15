@@ -816,6 +816,7 @@ optional = function(item__233, reluctant__560)
   end
   return Repeat(item__233, 0, 1, reluctant__234);
 end;
+temper.run_scheduler();
 exports = {};
 exports.RegexNode = RegexNode;
 exports.Capture = Capture;

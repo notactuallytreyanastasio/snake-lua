@@ -70,6 +70,7 @@ padTo__33 = function(minWidth__43, num__44, sb__45)
 end;
 dayOfWeekLookupTableLeapy__35 = temper.listof(0, 0, 3, 4, 0, 2, 5, 0, 3, 6, 1, 4, 6);
 dayOfWeekLookupTableNotLeapy__36 = temper.listof(0, 0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5);
+temper.run_scheduler();
 exports = {};
 exports.Date = Date;
 return exports;

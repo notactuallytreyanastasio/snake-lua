@@ -67,7 +67,7 @@ fn__145 = temper.adapt_generator_fn(function()
   if local_5 then
   end
 end);
-temper.TODO(fn__145);
+temper.async_launch(fn__145);
 fn__144 = temper.adapt_generator_fn(function()
   local t_9, t_10, t_11, t_12, t_13, local_14, local_15, local_16;
   local_14, local_15, local_16 = temper.pcall(function()
@@ -96,6 +96,7 @@ fn__144 = temper.adapt_generator_fn(function()
   if local_14 then
   end
 end);
-temper.TODO(fn__144);
+temper.async_launch(fn__144);
+temper.run_scheduler();
 exports = {};
 return exports;

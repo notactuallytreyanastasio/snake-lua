@@ -1769,6 +1769,7 @@ end;
 listJsonAdapter = function(adapterForT__839)
   return ListJsonAdapter__179(adapterForT__839);
 end;
+temper.run_scheduler();
 exports = {};
 exports.InterchangeContext = InterchangeContext;
 exports.NullInterchangeContext = NullInterchangeContext;

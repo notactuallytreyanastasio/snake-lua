@@ -6,6 +6,7 @@ end;
 readLine = function()
   return temper.bubble();
 end;
+temper.run_scheduler();
 exports = {};
 exports.sleep = sleep;
 exports.readLine = readLine;

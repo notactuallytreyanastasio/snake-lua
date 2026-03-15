@@ -225,6 +225,7 @@ runTest = function(testFun__100)
   test__102:softFailToHard();
   return nil;
 end;
+temper.run_scheduler();
 exports = {};
 exports.Test = Test;
 exports.processTestCases = processTestCases;

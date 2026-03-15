@@ -29,6 +29,7 @@ sendRequest__16 = function(url__35, method__36, bodyContent__37, bodyMimeType__3
   end
   return temper.bubble();
 end;
+temper.run_scheduler();
 exports = {};
 exports.NetRequest = NetRequest;
 exports.NetResponse = NetResponse;

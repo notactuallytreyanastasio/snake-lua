@@ -15,5 +15,6 @@ Up = temper.import('snake', 'Up');
 Left = temper.import('snake', 'Left');
 GameOver = temper.import('snake', 'GameOver');
 SnakeGame = temper.import('snake', 'SnakeGame');
+temper.run_scheduler();
 exports = {};
 return exports;
