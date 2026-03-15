@@ -431,7 +431,7 @@ render = function(game__147)
     temper.stringbuilder_append(sb__149, '#');
     x__150 = temper.int32_add(x__150, 1);
   end
-  temper.stringbuilder_append(sb__149, '#\n');
+  temper.stringbuilder_append(sb__149, '#\r\n');
   y__151 = 0;
   while true do
     local x__152;
@@ -451,7 +451,7 @@ render = function(game__147)
       temper.stringbuilder_append(sb__149, cellChar__43(game__147, p__153));
       x__152 = temper.int32_add(x__152, 1);
     end
-    temper.stringbuilder_append(sb__149, '#\n');
+    temper.stringbuilder_append(sb__149, '#\r\n');
     y__151 = temper.int32_add(y__151, 1);
   end
   temper.stringbuilder_append(sb__149, '#');
@@ -464,7 +464,7 @@ render = function(game__147)
     temper.stringbuilder_append(sb__149, '#');
     x__154 = temper.int32_add(x__154, 1);
   end
-  temper.stringbuilder_append(sb__149, '#\n');
+  temper.stringbuilder_append(sb__149, '#\r\n');
   t_91 = game__147.status;
   if temper.instance_of(t_91, Playing) then
     statusText__155 = 'Playing';
@@ -473,7 +473,7 @@ render = function(game__147)
   else
     statusText__155 = '';
   end
-  temper.stringbuilder_append(sb__149, temper.concat('Score: ', temper.int32_tostring(game__147.score), '  ', statusText__155, '\n'));
+  temper.stringbuilder_append(sb__149, temper.concat('Score: ', temper.int32_tostring(game__147.score), '  ', statusText__155, '\r', '\n'));
   return temper.stringbuilder_tostring(sb__149);
 end;
 temper.run_scheduler();
